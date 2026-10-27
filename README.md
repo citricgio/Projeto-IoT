@@ -74,7 +74,7 @@ Os valores são publicados como texto, com a unidade no final. O Node-RED precis
 
 ## Como funciona o código do dispositivo
 
-O código do ESP32 fica em `<!-- caminho do arquivo, ex.: dispositivo/dispositivo.ino -->`.
+O código do ESP32 fica em [`dispositivo/dispositivo.ino`](dispositivo/dispositivo.ino).
 
 1. Conecta à rede WiFi e ao broker MQTT (`EspMQTTClient`).
 2. Lê temperatura e umidade do DHT22 (`DHTesp`).

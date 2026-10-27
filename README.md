@@ -1,6 +1,10 @@
 # Projeto-IoT
 
-Monitoramento de temperatura e umidade para o cultivo de **soja**, com ESP32, sensor DHT22, MQTT e Node-RED. O sistema avisa o agricultor por **WhatsApp** quando as condições saem da faixa ideal. Projeto N2 da disciplina de IoT.
+Monitoramento de temperatura e umidade para o cultivo de **soja**, com ESP32, sensor DHT22, MQTT e Node-RED. O sistema avisa o agricultor por **WhatsApp** quando as condições saem da faixa ideal. Projeto N2 da disciplina de IoT. 
+
+O ESP32 lê a temperatura e umidade de um sensor DHT22 e publica os dados via MQTT (broker HiveMQ) por WiFi. Simulado no Wokwi, apoiado por plataforma low-code NodeRED
+
+
 
 ## Integrantes
 

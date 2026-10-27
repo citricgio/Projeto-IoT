@@ -110,7 +110,7 @@ Projeto-IoT/
 
 ## Demonstração
 
-- Vídeo: <!-- link do vídeo de demonstração -->
+- Vídeo: https://www.youtube.com/watch?v=UYNiL63rX_I
 
 ## Referências
 

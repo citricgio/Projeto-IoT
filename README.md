@@ -93,7 +93,7 @@ String TopicoPrefixo = "TESTMACK1165744"; // prefixo dos tópicos
 
 ## Node-RED
 
-O fluxo exportado fica em `<!-- caminho do arquivo, ex.: node-red/flow.json -->`. Para usar:
+O fluxo exportado fica em [`node-red/flow.json`](node-red/flow.json). Para usar:
 
 1. Abra o Node-RED e vá em **Menu → Import**.
 2. Selecione o arquivo JSON do fluxo.

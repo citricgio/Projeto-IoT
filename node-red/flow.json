@@ -1,0 +1,327 @@
+[
+    {
+        "id": "fc9117d7df16a19f",
+        "type": "tab",
+        "label": "Fluxo 3",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c1ad14a25627eab9",
+        "type": "debug",
+        "z": "fc9117d7df16a19f",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1040,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "2ec152343eddfb31",
+        "type": "mqtt in",
+        "z": "fc9117d7df16a19f",
+        "name": "Temperatura",
+        "topic": "TESTMACK1165744/Temperatura",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9422930561facef3",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 280,
+        "wires": [
+            [
+                "29ee653a2ba8c4bd",
+                "eea834bc13d6421f"
+            ]
+        ]
+    },
+    {
+        "id": "2bd783b094a43038",
+        "type": "mqtt in",
+        "z": "fc9117d7df16a19f",
+        "name": "Umidade",
+        "topic": "TESTMACK1165744/Umidade",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9422930561facef3",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 240,
+        "y": 520,
+        "wires": [
+            [
+                "ea496d36f2fe3130",
+                "890a59bc0eb703cf"
+            ]
+        ]
+    },
+    {
+        "id": "29ee653a2ba8c4bd",
+        "type": "function",
+        "z": "fc9117d7df16a19f",
+        "name": "verifica temperatura",
+        "func": "var Temperatura = parseFloat(msg.payload);\n\nif (Temperatura > 30) {\n    msg.payload = \"Temperatura alta! (\" + msg.payload + \") Isso pode prejudicar a floração da soja\";\n    return msg;\n} else if (Temperatura < 20) {\n    msg.payload = \"Temperatura baixa! (\" + msg.payload + \") Isso pode inibir o crescimento adequado da soja\";\n    return msg;\n} \nelse {\n    msg.payload = \"Temperatura ideal! (\" + msg.payload + \")\";\n    return msg;\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 280,
+        "wires": [
+            [
+                "b582a0ff74f594a3"
+            ]
+        ]
+    },
+    {
+        "id": "ea496d36f2fe3130",
+        "type": "function",
+        "z": "fc9117d7df16a19f",
+        "name": "verifica umidade",
+        "func": "var Umidade = parseFloat(msg.payload);\n\nif (Umidade > 18) {\n    msg.payload = \"Umidade alta! (\" + msg.payload + \") Pode causar danos à soja\";\n    return msg;\n\n} else if (Umidade < 13) {\n    msg.payload = \"Umidade baixa! (\" + msg.payload + \") Isso pode causar perda de grãos\";\n    return msg;\n    \n} \nelse {\n    msg.payload = \"Umidade ideal! (\" + msg.payload + \")\";\n    return msg;\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 520,
+        "wires": [
+            [
+                "3ea22359152ba49d"
+            ]
+        ]
+    },
+    {
+        "id": "01bce833ba36a6cd",
+        "type": "node-red-contrib-whatsapp-cmb-send-message",
+        "z": "fc9117d7df16a19f",
+        "name": "WhatsTemperatura",
+        "credtype": "account",
+        "account": "2457649b174ed37d",
+        "text": "payload",
+        "phonenumbervalue": "",
+        "apikeyvalue": "",
+        "apikeyinputtypemessage": "msg",
+        "phonenumberinputtypemessage": "msg",
+        "inputtypemessage": "msg",
+        "rejectssl": false,
+        "x": 850,
+        "y": 280,
+        "wires": [
+            [
+                "c1ad14a25627eab9"
+            ]
+        ]
+    },
+    {
+        "id": "2b5b2b7ceec68fcc",
+        "type": "node-red-contrib-whatsapp-cmb-send-message",
+        "z": "fc9117d7df16a19f",
+        "name": "WhatsUmidade",
+        "credtype": "account",
+        "account": "11df7702faa8882f",
+        "text": "payload",
+        "phonenumbervalue": "",
+        "apikeyvalue": "",
+        "apikeyinputtypemessage": "msg",
+        "phonenumberinputtypemessage": "msg",
+        "inputtypemessage": "msg",
+        "rejectssl": false,
+        "x": 860,
+        "y": 520,
+        "wires": [
+            [
+                "c1ad14a25627eab9"
+            ]
+        ]
+    },
+    {
+        "id": "b16ee1e3ff6b5ffb",
+        "type": "influxdb out",
+        "z": "fc9117d7df16a19f",
+        "influxdb": "ef305c67ed8fd42b",
+        "name": "InfluxDB",
+        "measurement": "Umidade",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "61e2eb6f90c75971",
+        "bucket": "bucket_N2",
+        "x": 480,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "890a59bc0eb703cf",
+        "type": "function",
+        "z": "fc9117d7df16a19f",
+        "name": "convert to int",
+        "func": "msg.payload = parseFloat(msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 620,
+        "wires": [
+            [
+                "b16ee1e3ff6b5ffb"
+            ]
+        ]
+    },
+    {
+        "id": "eea834bc13d6421f",
+        "type": "function",
+        "z": "fc9117d7df16a19f",
+        "name": "convert to int",
+        "func": "msg.payload = parseFloat(msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 360,
+        "wires": [
+            [
+                "0c8d0eb924853d83"
+            ]
+        ]
+    },
+    {
+        "id": "0c8d0eb924853d83",
+        "type": "influxdb out",
+        "z": "fc9117d7df16a19f",
+        "influxdb": "ef305c67ed8fd42b",
+        "name": "InfluxDB",
+        "measurement": "Temperatura",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "61e2eb6f90c75971",
+        "bucket": "bucket_N2",
+        "x": 480,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "b582a0ff74f594a3",
+        "type": "rbe",
+        "z": "fc9117d7df16a19f",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 670,
+        "y": 280,
+        "wires": [
+            [
+                "01bce833ba36a6cd"
+            ]
+        ]
+    },
+    {
+        "id": "3ea22359152ba49d",
+        "type": "rbe",
+        "z": "fc9117d7df16a19f",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 670,
+        "y": 520,
+        "wires": [
+            [
+                "2b5b2b7ceec68fcc"
+            ]
+        ]
+    },
+    {
+        "id": "9422930561facef3",
+        "type": "mqtt-broker",
+        "name": "HIVEMQ",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "2457649b174ed37d",
+        "type": "node-red-contrib-whatsapp-cmb-account",
+        "name": "Giovanna"
+    },
+    {
+        "id": "11df7702faa8882f",
+        "type": "node-red-contrib-whatsapp-cmb-account",
+        "name": "Giovanna"
+    },
+    {
+        "id": "ef305c67ed8fd42b",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "database",
+        "name": "InfluxDB Account",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "https://us-east-1-1.aws.cloud2.influxdata.com",
+        "timeout": "10",
+        "rejectUnauthorized": true
+    }
+]

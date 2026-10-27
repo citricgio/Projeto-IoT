@@ -64,8 +64,6 @@ Os valores são publicados como texto, com a unidade no final. O Node-RED precis
 
 ## Dicionário de dados
 
-<!-- Ajuste os nomes conforme o measurement e os campos reais no InfluxDB. -->
-
 | Campo | Tipo | Unidade | Descrição |
 |---|---|---|---|
 | `temperatura` | float | °C | Temperatura lida pelo DHT22 |
@@ -93,6 +91,7 @@ String TopicoPrefixo = "TESTMACK1165744"; // prefixo dos tópicos
 
 ## Node-RED
 
+As configurações para executar o Node-RED estão na documentação oficial: https://nodered.org/#get-started
 O fluxo exportado fica em [`node-red/flow.json`](node-red/flow.json). Para usar:
 
 1. Abra o Node-RED e vá em **Menu → Import**.
@@ -100,24 +99,18 @@ O fluxo exportado fica em [`node-red/flow.json`](node-red/flow.json). Para usar:
 3. Configure o broker MQTT, as credenciais da API do WhatsApp e a conexão com o InfluxDB.
 4. Faça o deploy.
 
-## Dashboards
-
-<!-- Adicione prints dos dashboards, com pelo menos dois painéis cada. -->
-
 ## Estrutura do repositório
 
 ```
 Projeto-IoT/
 ├── dispositivo/     # código-fonte dos ESP32
 ├── node-red/        # fluxo (JSON) do Node-RED
-├── imagens/         # foto do protótipo e prints dos dashboards
 └── README.md
 ```
 
 ## Demonstração
 
 - Vídeo: <!-- link do vídeo de demonstração -->
-- Foto do protótipo: <!-- imagem em imagens/ -->
 
 ## Referências
 

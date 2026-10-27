@@ -99,6 +99,14 @@ O fluxo exportado fica em [`node-red/flow.json`](node-red/flow.json). Para usar:
 3. Configure o broker MQTT, as credenciais da API do WhatsApp e a conexão com o InfluxDB.
 4. Faça o deploy.
 
+### Exemplo
+<img width="700" height="343" alt="Screenshot 2026-10-26 at 23 35 18" src="https://github.com/user-attachments/assets/b962019f-4b57-4244-b93e-b716344eeddb" />
+<img width="700" height="343" alt="Screenshot 2026-10-26 at 23 36 12" src="https://github.com/user-attachments/assets/e89654e2-f2a5-4887-9725-01b6a0cc9dc1" />
+<img width="700" height="343" alt="Screenshot 2026-10-26 at 23 35 49" src="https://github.com/user-attachments/assets/1d95c890-29b9-43cc-ae96-0531071b42cc" />
+
+
+
+
 ## Estrutura do repositório
 
 ```
